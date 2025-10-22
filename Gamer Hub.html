@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub Pro - Ultimate Gaming Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff4e50;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f5f5f5;
+            --gray: #2a2a2a;
+            --success: #4CAF50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-accent {
+            background: linear-gradient(to right, var(--accent), #ff8c00);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            color: var(--primary);
+            font-size: 28px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.7);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: rgba(42, 42, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+        
+        .feature-card i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Platforms Section */
+        .platforms {
+            background: rgba(10, 10, 10, 0.8);
+        }
+        
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .platform-card {
+            background: rgba(42, 42, 42, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .platform-card:hover {
+            transform: scale(1.05);
+            border-color: var(--secondary);
+        }
+        
+        .platform-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+        
+        /* Chat & Calls Section */
+        .chat-calls-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .chat-container, .calls-container {
+            background: rgba(42, 42, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .chat-header, .calls-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(10, 10, 10, 0.5);
+            border-radius: 10px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: rgba(106, 17, 203, 0.2);
+        }
+        
+        .message.user {
+            background: rgba(37, 117, 252, 0.2);
+            margin-left: 20px;
+        }
+        
+        .message-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 50px;
+            background: rgba(10, 10, 10, 0.5);
+            color: white;
+        }
+        
+        .online-users {
+            margin-top: 20px;
+        }
+        
+        .user-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .user {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(10, 10, 10, 0.5);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+        
+        .user i {
+            color: var(--success);
+        }
+        
+        .call-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .call-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .call-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .call-btn.primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .call-btn.accent {
+            background: linear-gradient(to right, var(--accent), #ff8c00);
+        }
+        
+        /* Monetization Section */
+        .monetization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .monetization-card {
+            background: rgba(42, 42, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .monetization-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+        
+        .monetization-card i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--accent), #ff8c00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            background: linear-gradient(to right, var(--accent), #ff8c00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.9);
+            padding: 60px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .chat-calls-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(18, 18, 18, 0.95);
+                flex-direction: column;
+                padding: 20px;
+                backdrop-filter: blur(10px);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <h1>GameHub Pro</h1>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#platforms">Platforms</a></li>
+                    <li><a href="#chat">Chat & Calls</a></li>
+                    <li><a href="#monetization">Monetization</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="#" class="btn">Login</a>
+                <a href="#" class="btn btn-accent">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h2>The Ultimate Gaming Hub for Serious Players</h2>
+            <p>Connect, compete, and earn with GameHub Pro. Join thousands of gamers across all platforms in one unified ecosystem with integrated chat, voice calls, and multiple monetization options.</p>
+            <div class="hero-buttons">
+                <a href="#features" class="btn">Explore Features</a>
+                <a href="#monetization" class="btn btn-accent">Start Earning</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-plug"></i>
+                    <h3>Multi-Platform Integration</h3>
+                    <p>Connect your accounts from Steam, PlayStation, Xbox, Nintendo, and more in one centralized hub.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-comments"></i>
+                    <h3>Unified Chat System</h3>
+                    <p>Communicate with friends across all gaming platforms with our advanced chat system.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Voice & Video Calls</h3>
+                    <p>Crystal clear voice and video calls with screen sharing capabilities for strategizing.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-coins"></i>
+                    <h3>Monetization Engine</h3>
+                    <p>Convert your gaming skills and social interactions into real revenue streams.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section class="platforms" id="platforms">
+        <div class="container">
+            <h2 class="section-title">Supported Platforms</h2>
+            <div class="platforms-grid">
+                <div class="platform-card">
+                    <i class="fab fa-steam fa-3x"></i>
+                    <h3>Steam</h3>
+                    <p>Full integration</p>
+                </div>
+                <div class="platform-card">
+                    <i class="fab fa-playstation fa-3x"></i>
+                    <h3>PlayStation</h3>
+                    <p>Complete connectivity</p>
+                </div>
+                <div class="platform-card">
+                    <i class="fab fa-xbox fa-3x"></i>
+                    <h3>Xbox</h3>
+                    <p>Seamless linking</p>
+                </div>
+                <div class="platform-card">
+                    <i class="fas fa-gamepad fa-3x"></i>
+                    <h3>Nintendo</h3>
+                    <p>Full support</p>
+                </div>
+                <div class="platform-card">
+                    <i class="fab fa-android fa-3x"></i>
+                    <h3>Mobile</h3>
+                    <p>Cross-platform play</p>
+                </div>
+                <div class="platform-card">
+                    <i class="fas fa-desktop fa-3x"></i>
+                    <h3>PC</h3>
+                    <p>All major launchers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat & Calls Section -->
+    <section class="chat-calls" id="chat">
+        <div class="container">
+            <h2 class="section-title">Connect & Communicate</h2>
+            <div class="chat-calls-container">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h3>Global Chat</h3>
+                        <span class="online-count"><i class="fas fa-circle"></i> 2,543 online</span>
+                    </div>
+                    <div class="chat-messages">
+                        <div class="message">
+                            <div class="message-info">
+                                <span class="user">ProGamer92</span>
+                                <span class="time">2:34 PM</span>
+                            </div>
+                            <p>Anyone up for some ranked matches later?</p>
+                        </div>
+                        <div class="message user">
+                            <div class="message-info">
+                                <span class="user">You</span>
+                                <span class="time">2:35 PM</span>
+                            </div>
+                            <p>I'm down! What game?</p>
+                        </div>
+                        <div class="message">
+                            <div class="message-info">
+                                <span class="user">StreamQueen</span>
+                                <span class="time">2:36 PM</span>
+                            </div>
+                            <p>Going live in 30 minutes with a special tournament!</p>
+                        </div>
+                        <div class="message">
+                            <div class="message-info">
+                                <span class="user">EsportsPro</span>
+                                <span class="time">2:38 PM</span>
+                            </div>
+                            <p>New coaching sessions available. DM for details!</p>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="Type your message...">
+                        <button class="btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="online-users">
+                        <h4>Online Now</h4>
+                        <div class="user-list">
+                            <div class="user">
+                                <i class="fas fa-circle"></i>
+                                <span>ProGamer92</span>
+                            </div>
+                            <div class="user">
+                                <i class="fas fa-circle"></i>
+                                <span>StreamQueen</span>
+                            </div>
+                            <div class="user">
+                                <i class="fas fa-circle"></i>
+                                <span>EsportsPro</span>
+                            </div>
+                            <div class="user">
+                                <i class="fas fa-circle"></i>
+                                <span>NoobSlayer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="calls-container">
+                    <div class="calls-header">
+                        <h3>Voice & Video Calls</h3>
+                        <span class="call-status"><i class="fas fa-circle"></i> Ready</span>
+                    </div>
+                    <div class="call-display">
+                        <div class="call-participants">
+                            <div class="participant main">
+                                <i class="fas fa-user fa-4x"></i>
+                                <p>You</p>
+                            </div>
+                            <div class="participant">
+                                <i class="fas fa-user fa-3x"></i>
+                                <p>ProGamer92</p>
+                            </div>
+                            <div class="participant">
+                                <i class="fas fa-user fa-3x"></i>
+                                <p>StreamQueen</p>
+                            </div>
+                        </div>
+                        <div class="call-info">
+                            <p><strong>Current Call:</strong> Strategy Session</p>
+                            <p><strong>Duration:</strong> 12:45</p>
+                        </div>
+                    </div>
+                    <div class="call-controls">
+                        <div class="call-btn">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <div class="call-btn">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="call-btn primary">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="call-btn">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <div class="call-btn accent">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    <div class="invite-section">
+                        <h4>Invite Players</h4>
+                        <div class="invite-input">
+                            <input type="text" placeholder="Enter player username">
+                            <button class="btn">Invite</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Monetization Section -->
+    <section class="monetization" id="monetization">
+        <div class="container">
+            <h2 class="section-title">Monetize Your Gaming</h2>
+            <div class="monetization-grid">
+                <div class="monetization-card">
+                    <i class="fas fa-gem"></i>
+                    <h3>Premium Subscriptions</h3>
+                    <p>Unlock exclusive features, early access, and premium content</p>
+                    <div class="price">$9.99/month</div>
+                    <a href="#" class="btn">Subscribe Now</a>
+                </div>
+                <div class="monetization-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Tournaments & Competitions</h3>
+                    <p>Join paid tournaments with cash prizes and sponsorships</p>
+                    <div class="price">Up to $5,000</div>
+                    <a href="#" class="btn">View Events</a>
+                </div>
+                <div class="monetization-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Content Monetization</h3>
+                    <p>Earn from your streams, guides, and gaming content</p>
+                    <div class="price">60% Revenue Share</div>
+                    <a href="#" class="btn">Start Creating</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>GameHub Pro</h3>
+                    <p>The ultimate gaming platform connecting players across all systems with advanced communication and monetization features.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#platforms">Platforms</a></li>
+                        <li><a href="#chat">Chat & Calls</a></li>
+                        <li><a href="#monetization">Monetization</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Gaming Platforms</h3>
+                    <ul>
+                        <li><a href="#">Steam</a></li>www.steam.com
+                        <li><a href="#">PlayStation</a></li>
+                        <li><a href="#">Xbox</a></li>
+                        <li><a href="#">Nintendo</a></li>
+                        <li><a href="#">Mobile Gaming</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 GameHub Pro. All Rights Reserved. All trademarks are property of their respective owners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('nav ul').classList.remove('show');
+                }
+            });
+        });
+        
+        // Chat functionality
+        const chatInput = document.querySelector('.chat-input input');
+        const chatMessages = document.querySelector('.chat-messages');
+        
+        chatInput.addEventListener('keypress', function(e) {
+            if(e.key === 'Enter' && this.value.trim() !== '') {
+                const message = this.value;
+                addMessage('You', message, true);
+                this.value = '';
+                
+                // Simulate response after a delay
+                setTimeout(() => {
+                    const responses = [
+                        "Sounds good!",
+                        "I'm in!",
+                        "Let's do it!",
+                        "What time?",
+                        "Count me in!"
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage('ProGamer92', randomResponse, false);
+                }, 1000);
+            }
+        });
+        
+        function addMessage(user, text, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : ''}`;
+            
+            const now = new Date();
+            const timeString = now.getHours() + ':' + (now.getMinutes() < 10 ? '0' : '') + now.getMinutes();
+            
+            messageDiv.innerHTML = `
+                <div class="message-info">
+                    <span class="user">${user}</span>
+                    <span class="time">${timeString}</span>
+                </div>
+                <p>${text}</p>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Call controls
+        const callButtons = document.querySelectorAll('.call-btn');
+        callButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                
+                if(icon.classList.contains('fa-microphone')) {
+                    icon.classList.toggle('fa-microphone');
+                    icon.classList.toggle('fa-microphone-slash');
+                } else if(icon.classList.contains('fa-video')) {
+                    icon.classList.toggle('fa-video');
+                    icon.classList.toggle('fa-video-slash');
+                } else if(icon.classList.contains('fa-phone')) {
+                    // Toggle call state
+                    const callStatus = document.querySelector('.call-status');
+                    if(callStatus.innerHTML.includes('Active')) {
+                        callStatus.innerHTML = '<i class="fas fa-circle"></i> Ready';
+                        icon.className = 'fas fa-phone';
+                    } else {
+                        callStatus.innerHTML = '<i class="fas fa-circle" style="color: #4CAF50;"></i> Active';
+                        icon.className = 'fas fa-phone-slash';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
